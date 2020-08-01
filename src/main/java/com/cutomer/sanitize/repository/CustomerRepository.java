@@ -15,5 +15,6 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
 	
 	 List<Customer> findByDateBetween(LocalDateTime startDate,LocalDateTime endDate);
 	// List<Customer> findAllByDateLessThanEqualAndEndDateGreaterThanEqual()
+	 List<Customer> findByDateBetweenAndUuid(LocalDateTime startDate,LocalDateTime endDate,String uuid);
 
 }

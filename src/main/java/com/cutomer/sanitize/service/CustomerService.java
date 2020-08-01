@@ -33,6 +33,10 @@ public class CustomerService {
 		List<Customer> customers = customerRepository.findByDateBetween(startDate, endDate);
 		return customers;
 	}
+	public List<Customer> getCustomers(LocalDateTime startDate, LocalDateTime endDate,String uuid) {
+		List<Customer> customers = customerRepository.findByDateBetweenAndUuid(startDate, endDate,uuid);
+		return customers;
+	}
 
 	
 	void m2()

@@ -50,7 +50,16 @@ public class SanitizeController {
 		}
 		LocalDateTime fromdatetime = fromdate.atStartOfDay();
 		LocalDateTime todatetime = todate.atTime(LocalTime.MAX);
-		List<Customer> customers = CustomerService.getCustomers(fromdatetime, todatetime);
+		List<Customer> customers = null;
+		if(searchdata.getUuid().equals("ADMIN"))
+		{
+			customers= CustomerService.getCustomers(fromdatetime, todatetime);
+		}
+		else
+		{
+			customers= CustomerService.getCustomers(fromdatetime, todatetime,searchdata.getUuid());
+		}
+		
 		if (customers.size() > 0) {
 			customers.forEach(cust->
 			{

@@ -17,7 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	 @GenericGenerator(name = "customer_Id", strategy =
+	@GenericGenerator(name = "customer_Id", strategy =
 			  "com.cutomer.sanitize.util.CustomerIdGenerator")
 	@GeneratedValue(generator = "customer_Id")
 	@Column(name="customer_Id")
@@ -36,6 +36,8 @@ public class Customer implements Serializable {
 	private String orderStatus;
 	private LocalDateTime date;
 	private String isValidUser;
+	@NotEmpty(message="uuid cannot be empty")
+	private String uuid;
 	
 	
 	public Customer() {
@@ -43,9 +45,12 @@ public class Customer implements Serializable {
 	}
 
 
-	public Customer(String customerId, String vehicleType, String washingType, String primaryNumber,
-			String secondaryNumber, String userLocation, String userMessage, String orderStatus, LocalDateTime date,
-			String isValidUser) {
+	public Customer(String customerId, @NotEmpty(message = "vehicleType cannot be empty") String vehicleType,
+			@NotEmpty(message = "washingType cannot be empty") String washingType,
+			@NotEmpty(message = "primaryNumber cannot be empty") String primaryNumber, String secondaryNumber,
+			@NotEmpty(message = "userLocation cannot be empty") String userLocation, String userMessage,
+			String orderStatus, LocalDateTime date, String isValidUser,
+			@NotEmpty(message = "uuid cannot be empty") String uuid) {
 		super();
 		this.customerId = customerId;
 		this.vehicleType = vehicleType;
@@ -57,8 +62,10 @@ public class Customer implements Serializable {
 		this.orderStatus = orderStatus;
 		this.date = date;
 		this.isValidUser = isValidUser;
+		this.uuid = uuid;
 	}
 
+	
 
 	public String getCustomerId() {
 		return customerId;
@@ -160,8 +167,13 @@ public class Customer implements Serializable {
 	}
 
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getUuid() {
+		return uuid;
+	}
+
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 
 
@@ -170,6 +182,10 @@ public class Customer implements Serializable {
 		return "Customer [customerId=" + customerId + ", vehicleType=" + vehicleType + ", washingType=" + washingType
 				+ ", primaryNumber=" + primaryNumber + ", secondaryNumber=" + secondaryNumber + ", userLocation="
 				+ userLocation + ", userMessage=" + userMessage + ", orderStatus=" + orderStatus + ", date=" + date
-				+ ", isValidUser=" + isValidUser + "]";
+				+ ", isValidUser=" + isValidUser + ", uuid=" + uuid + "]";
 	}
+	
+	
+	
+	
 }

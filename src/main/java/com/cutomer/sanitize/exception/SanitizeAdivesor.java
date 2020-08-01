@@ -53,5 +53,12 @@ public class SanitizeAdivesor extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(errormap, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	@ExceptionHandler(TermsConditonsException.class)
+	public ResponseEntity<Object> handleTermsConditonsException(TermsConditonsException ex, WebRequest request) {
+		Map<String, Object> errormap = new HashMap<>();
+		errormap.put("message", ex.getMessage());
+		return new ResponseEntity<>(errormap, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
 
 }
